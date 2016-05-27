@@ -24,7 +24,10 @@ class ReactEcharts extends React.Component {
   _renderChart() {
     const chartDom = this.refs.chart
     const chart = echarts.getInstanceByDom(chartDom) || echarts.init(chartDom)
-    const { option, showLoading } = this.props
+    const { onClick, option, showLoading } = this.props
+    if (onClick) {
+      chart.on('click', onClick)
+    }
     chart.setOption(option)
     if (showLoading) {
       chart.showLoading()
@@ -49,6 +52,7 @@ ReactEcharts.propTypes = {
   height: PropTypes.number.isRequired,
   option: PropTypes.object.isRequired,
   showLoading: PropTypes.bool,
+  onClick: PropTypes.func,
   onReady: PropTypes.func
 }
 
