@@ -40,6 +40,10 @@ Props Taken:
 
   whether to show a spinning loader
 
++ __onClick__ (optional, func)
+
+  callback when data clicked
+
 + __onReady__ (optional, func)
 
   callback when then chart is initialized, the echart instance is passed in, for detail, refer to [http://echarts.baidu.com/api.html#echartsInstance](http://echarts.baidu.com/api.html#echartsInstance)
