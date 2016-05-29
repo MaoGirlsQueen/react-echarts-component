@@ -26,6 +26,7 @@ class ReactEcharts extends React.Component {
     const chart = echarts.getInstanceByDom(chartDom) || echarts.init(chartDom)
     const { onClick, option, showLoading } = this.props
     if (onClick) {
+      chart.off('click');
       chart.on('click', onClick)
     }
     chart.setOption(option)
