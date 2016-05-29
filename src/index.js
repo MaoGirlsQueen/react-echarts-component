@@ -1,51 +1,52 @@
-import React, { PropTypes } from 'react'
-import echarts from 'echarts'
-import elementResizeEvent from 'element-resize-event'
+import React, { PropTypes } from 'react';
+import echarts from 'echarts';
+import elementResizeEvent from 'element-resize-event';
 
 class ReactEcharts extends React.Component {
   componentDidMount() {
-    const chart = this._renderChart()
+    const chart = this._renderChart();
     // need to manually resize the chart when the container changes size
     elementResizeEvent(this.refs.chart, () => {
-      chart.resize()
-    })
-    const { onReady } = this.props
-    if (typeof onReady === 'function') onReady(chart)
+      chart.resize();
+    });
+    const { onReady } = this.props;
+    if (typeof onReady === 'function') onReady(chart);
   }
 
   componentDidUpdate() {
-    this._renderChart()
+    this._renderChart();
   }
 
   componentWillUnmount() {
-    echarts.dispose(this.refs.chart)
+    echarts.dispose(this.refs.chart);
   }
 
   _renderChart() {
-    const chartDom = this.refs.chart
-    const chart = echarts.getInstanceByDom(chartDom) || echarts.init(chartDom)
-    const { onClick, option, showLoading } = this.props
+    const chartDom = this.refs.chart;
+    const chart = echarts.getInstanceByDom(chartDom) || echarts.init(chartDom);
+    const { onClick, option, showLoading } = this.props;
     if (onClick) {
       chart.off('click');
-      chart.on('click', onClick)
+      chart.on('click', onClick);
     }
-    chart.setOption(option)
+    chart.setOption(option);
     if (showLoading) {
-      chart.showLoading()
+      chart.showLoading();
     } else {
-      chart.hideLoading()
+      chart.hideLoading();
     }
-    return chart
+    return chart;
   }
 
   render() {
-    const { height } = this.props
+    const { height } = this.props;
 
     return (
       <div
         ref="chart"
-        style={{height}} />
-    )
+        style={{ height }}
+      />
+    );
   }
 }
 
@@ -54,7 +55,7 @@ ReactEcharts.propTypes = {
   option: PropTypes.object.isRequired,
   showLoading: PropTypes.bool,
   onClick: PropTypes.func,
-  onReady: PropTypes.func
-}
+  onReady: PropTypes.func,
+};
 
-export default ReactEcharts
+export default ReactEcharts;
